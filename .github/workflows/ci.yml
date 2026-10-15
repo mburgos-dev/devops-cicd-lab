@@ -19,6 +19,6 @@ jobs:
 
       - name: Explorar repositorio
         run: |
-              pwd 
-              ls -la 
-              cat README.md
+          pwd 
+          ls -la 
+          cat README.md

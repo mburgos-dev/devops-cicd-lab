@@ -1,0 +1,15 @@
+name: Mi primer workflow
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  saludo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar saludo
+        run: echo "Hola, este es mi primer pipeline CI/CD"
+
+      - name: Información del sistema
+        run: uname -a

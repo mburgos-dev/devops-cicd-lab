@@ -11,5 +11,11 @@ jobs:
       - name: Mostrar saludo
         run: echo "Hola, este es mi primer pipeline CI/CD"
 
+      - name: Descargar repositorio
+        uses: actions/checkout@v7
+
       - name: Información del sistema
         run: uname -a
+
+      - name: Explorar repositorio
+        run: pwd | ls -la | cat README.md

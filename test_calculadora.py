@@ -7,3 +7,6 @@ def test_sumar_positivos():
 
 def test_sumar_negativos():
     assert sumar(-2, -3) == -5
+
+def test_sumar_positivos_negativos():
+    assert sumar(-2, 3) == 1

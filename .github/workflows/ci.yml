@@ -60,6 +60,10 @@ jobs:
     permissions:
       contents: read
       packages: write
+
+    env:
+      IMAGE_TAG: ${{ github.sha }}
+
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v7
@@ -72,7 +76,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Construir imagen
-        run: docker build -t ghcr.io/mburgos-dev/calculadora-tests:v1 .
+        run: docker build -t ghcr.io/mburgos-dev/calculadora-tests:$IMAGE_TAG .
 
       - name: Publicar imagen en GHCR
-        run: docker push ghcr.io/mburgos-dev/calculadora-tests:v1
+        run: docker push ghcr.io/mburgos-dev/calculadora-tests:$IMAGE_TAG
+
+      - name: Mostrar variable IMAGE_TAG
+        run: echo "$IMAGE_TAG"

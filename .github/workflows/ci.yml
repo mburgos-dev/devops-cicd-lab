@@ -39,3 +39,16 @@ jobs:
 
       - name: Ejecutar tests
         run: python -m pytest -v
+    
+  docker:
+    needs: pruebas
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v7
+
+      - name: Construir imagen Docker
+        run: docker build -t calculadora-tests:v1 .
+
+      - name: Ejecutar contenedor Docker
+        run: docker run --rm calculadora-tests:v1

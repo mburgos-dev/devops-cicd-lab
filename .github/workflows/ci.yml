@@ -62,12 +62,16 @@ jobs:
       - name: Comprobar estado de salud de la API
         run: curl -f --retry 5 --retry-all-errors --retry-delay 1 http://127.0.0.1:5001/salud
 
-      - name: Diagnostidcar contenedor API
+      - name: Diagnosticar contenedor API
         if: always()
         run: |
           docker ps -a
           docker logs calculadora-api
           docker port calculadora-api
+
+      - name: Limpiar contenedor API
+        if: always()
+        run: docker rm -f calculadora-api || true
 
   publicar_imagen:
     needs: docker

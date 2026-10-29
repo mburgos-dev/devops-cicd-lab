@@ -60,7 +60,14 @@ jobs:
         run: docker run -d --name calculadora-api -p 127.0.0.1:5001:5000 calculadora-api:v1
 
       - name: Comprobar estado de salud de la API
-        run: curl -f --retry 5 --retry-connrefused --retry-delay 1 http://127.0.0.1:5001/salud
+        run: curl -f --retry 5 --retry-all-errors --retry-delay 1 http://127.0.0.1:5001/salud
+
+      - name: Diagnostidcar contenedor API
+        if: always()
+        run: |
+          docker ps -a
+          docker logs calculadora-api
+          docker port calculadora-api
 
   publicar_imagen:
     needs: docker

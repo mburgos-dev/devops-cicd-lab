@@ -53,6 +53,15 @@ jobs:
       - name: Ejecutar contenedor Docker
         run: docker run --rm calculadora-tests:v1
 
+      - name: Construir imagen API
+        run: docker build -f Dockerfile.api -t calculadora-api:v1 .
+
+      - name: Ejecutar contenedor API
+        run: docker run -d --name calculadora-api -p 127.0.0.1:5001:5000 calculadora-api:v1
+
+      - name: Comprobar estado de salud de la API
+        run: curl -f --retry 5 --retry-connrefused --retry-delay 1 http://127.0.0.1:5001/salud
+
   publicar_imagen:
     needs: docker
     runs-on: ubuntu-latest
